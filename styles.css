@@ -1,0 +1,40 @@
+* {
+  font-family: 'Urbanist', sans-serif;
+  color:white
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+
+.computer-side {
+  display: flex;
+  flex-direction: column;
+  width: 20%
+}
+
+main {
+  flex: display;
+  align-text: center;
+  width: 60%;
+  background-color: #184233
+}
+
+body {
+  display: flex;
+  align-content: center;
+  justify-content: center;  
+}
+
+.human-side {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+}
+
+aside {
+  background-color: #538059
+}
