@@ -1,0 +1,76 @@
+* {
+  font-family: 'Urbanist', sans-serif;
+  color: white;
+  /* border: 1px solid black; */
+}
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+main {
+  flex: display;
+  text-align: center;
+  width: 60%;
+  background-color: #184233
+}
+
+body {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+.human-side,
+.computer-side {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  text-align: center;
+  background-color: #538059;
+}
+
+.human-emoji,
+.computer-emoji {
+  font-size: 45px;
+  margin: 25px 0 0 0
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 60px;
+  margin: 30px 0 0 0
+}
+
+h2 {
+  font-size: 30px;
+  margin: 10px 0 10px 0;
+  font-weight: 300
+}
+
+h5 ,h4 {
+  font-size: 22px;
+  margin: 15px 0 0 0;
+  /* font-weight: 300 */
+}
+
+.container-1, .container-2 {
+  background-color:rgba(121, 121, 116, 0.921);
+  width: 250px;
+  margin: 80px 0 0 0;
+  cursor: pointer;
+}
+
+.game-types {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  
+}
+
+.container-1:hover, .container-2:hover {
+  background-color:  #538059;
+}
