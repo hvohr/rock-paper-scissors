@@ -29,7 +29,6 @@ classicVersion.addEventListener('click', displayClassic)
 classicOptionIcons.addEventListener('click', function (e) {
   if (e.target.classList.contains('happy')) {
     winConditions(e)
-    drawConditions(e)
   }
 })
 
@@ -67,46 +66,75 @@ function createGame() {
 
 // display functions
 
-function drawConditions(e) {
-  if (e.target === randomIcon(classicFighters)) {
-    console.log(e.target)
-    console.log(randomIcon(classicFighters))
-    show(drawMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(e.target)
-  }
-
 function winConditions(e) {
-  if (e.target.id === "happy-scissors-icon" && randomIcon(classicFighters) === "happy-rocks-icon") {
+  console.log(randomIcon(classicFighters))
+  console.log(e.target.id)
+  if (e.target.id === "happy-scissors-icon" && randomIcon(classicFighters) === "happy-rock-icon") {
+    console.log(randomIcon(classicFighters))
     show(computerWinnerMessage)
     hide(alternativePageMessage)
     hide(paperIcon)
     hide(scissorsIcon)
     hide(rocksIcon)
-    show(e.target)
+    show(randomIcon(classicFighters));
   } else if (e.target.id === "happy-rocks-icon" && randomIcon(classicFighters) === "happy-scissors-icon") {
     show(humanWinnerMessage)
     hide(alternativePageMessage)
     hide(paperIcon)
     hide(scissorsIcon)
     hide(rocksIcon)
-    show(e.target)
+    show(e.target);
+  } else if (e.target.id === "happy-scissors-icon" && randomIcon(classicFighters) === "happy-paper-icon") {
+    show(humanWinnerMessage)
+    hide(alternativePageMessage)
+    hide(paperIcon)
+    hide(scissorsIcon)
+    hide(rocksIcon)
+    show(e.target);
+  } else if (e.target.id === "happy-paper-icon" && randomIcon(classicFighters) === "happy-scissors-icon") {
+    show(computerWinnerMessage)
+    hide(alternativePageMessage)
+    hide(paperIcon)
+    hide(scissorsIcon)
+    hide(rocksIcon)
+    show(randomIcon(classicFighters));
+  } else if (e.target.id === "happy-paper-icon" && randomIcon(classicFighters) === "happy-rocks-icon") {
+    show(humanWinnerMessage)
+    hide(alternativePageMessage)
+    hide(paperIcon)
+    hide(scissorsIcon)
+    hide(rocksIcon)
+    show(e.target);
+  } else if (e.target.id === "happy-rocks-icon" && randomIcon(classicFighters) === "happy-paper-icon") {
+    show(computerWinnerMessage)
+    hide(alternativePageMessage)
+    hide(paperIcon)
+    hide(scissorsIcon)
+    hide(rocksIcon)
+    show(randomIcon(classicFighters));
   }
 }
-}
 
 
+console.log(winConditions());
+
+//DRAW ISSUE
+  // if (e.target === randomIcon(classicFighters)) {
+  //   console.log(e.target)
+  //   console.log(randomIcon(classicFighters))
+  //   show(drawMessage)
+  //   hide(alternativePageMessage)
+  //   hide(paperIcon)
+  //   hide(scissorsIcon)
+  //   hide(rocksIcon)
+  //   show(e.target)
 
 
 function randomIcon(array) {
   var random = Math.floor(Math.random() * array.length)
   var item = array[random]
-  return item
+  return item.id
 }
-
 
 function hide(element) {
   element.setAttribute("hidden", "")
