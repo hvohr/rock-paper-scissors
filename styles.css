@@ -59,7 +59,7 @@ h4 {
 
 .container-1,
 .container-2 {
-  background-color: rgba(121, 121, 116, 0.921);
+  background-color: #797974eb;
   width: 250px;
   height: 250px;
   margin: 55px 0 0 0;
@@ -74,8 +74,9 @@ h4 {
 }
 
 .container-1:hover,
-.container-2:hover {
-  background-color: rgba(77, 77, 75, 0.921);
+.container-2:hover,
+button:hover {
+  background-color: #4d4d4beb;
 }
 
 img {
@@ -95,4 +96,21 @@ form {
   height: 65%;
   align-items: center;
   justify-content: center;
+}
+
+button {
+  font-size: 20px;
+  background-color: #797974eb;
+  width: 100px;
+  cursor: pointer;
+  margin: 15px
+}
+
+.human-side {
+  flex: display;
+  align-items: center;
+}
+
+.change-button {
+  
 }
