@@ -54,7 +54,7 @@ h2 {
 h5,
 h4 {
   font-size: 22px;
-  margin: 15px 0 0 0;
+  margin: 15px 0 10px 0;
 }
 
 .container-1,
@@ -100,10 +100,11 @@ form {
 
 button {
   font-size: 20px;
-  background-color: #797974eb;
+  background-color: #3f3f3beb;
   width: 100px;
   cursor: pointer;
-  margin: 15px
+  margin: 15px;
+  border: 0;
 }
 
 .human-side {

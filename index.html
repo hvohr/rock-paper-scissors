@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <title>"Rock, Paper, Scissors"</title>
   <link rel="stylesheet" href="styles.css">
@@ -13,16 +12,16 @@
   <aside class="human-side">
     <h3 class="human-emoji">👩🏼</h3>
     <h2>Human</h2>
-    <h5>Wins: 0</h5>
+    <h5 class = "human-win-count">Wins: 0</h5>
     <div class = "change-button">
-      <button class = "change-game-button" type = "reset">Change Game?</button>
+      <button class = "change-game-button" hidden type = "reset">Change Game?</button>
     </div>
   </aside>
   <main>
     <section class="title-section">
       <h1>Rock, Paper, Scissors</h1>
       <h2 class = "main-page-message">Choose your game!</h2>
-      <h2 class = "alternative-page-message" hidden>Choose your fighter!</h2>
+      <h2 hidden class = "alternative-page-message">Choose your fighter!</h2>
     </section>
     <section class="game-types">
       <div class="container-1">
@@ -54,7 +53,7 @@
   <aside class="computer-side">
     <h3 class="computer-emoji">💻</h3>
     <h2>Computer</h2>
-    <h5>Wins: 0</h5>
+    <h5 class = "computer-win-count" .>Wins: 0</h5>
   </aside>
   <script type="text/javascript" src="main.js"></script>
 </body>
