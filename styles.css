@@ -1,7 +1,7 @@
 * {
   font-family: 'Urbanist', sans-serif;
   color: white;
-  /* border: 1px solid black; */
+
 }
 
 body,
@@ -51,16 +51,18 @@ h2 {
   font-weight: 300
 }
 
-h5 ,h4 {
+h5,
+h4 {
   font-size: 22px;
   margin: 15px 0 0 0;
-  /* font-weight: 300 */
 }
 
-.container-1, .container-2 {
-  background-color:rgba(121, 121, 116, 0.921);
+.container-1,
+.container-2 {
+  background-color: #797974eb;
   width: 250px;
-  margin: 80px 0 0 0;
+  height: 250px;
+  margin: 55px 0 0 0;
   cursor: pointer;
 }
 
@@ -68,9 +70,47 @@ h5 ,h4 {
   display: flex;
   align-items: center;
   flex-direction: column;
-  
+  height: 50px;
 }
 
-.container-1:hover, .container-2:hover {
-  background-color: rgba(77, 77, 75, 0.921);
+.container-1:hover,
+.container-2:hover,
+button:hover {
+  background-color: #4d4d4beb;
+}
+
+img {
+  width: 150px;
+  height: 150px;
+  margin: 15px;
+  cursor: pointer;
+  opacity: 0.6
+}
+
+img:hover {
+  opacity: 1.0
+}
+
+form {
+  display: flex;
+  height: 65%;
+  align-items: center;
+  justify-content: center;
+}
+
+button {
+  font-size: 20px;
+  background-color: #797974eb;
+  width: 100px;
+  cursor: pointer;
+  margin: 15px
+}
+
+.human-side {
+  flex: display;
+  align-items: center;
+}
+
+.change-button {
+  
 }
