@@ -2,6 +2,7 @@
 var classicVersion = document.querySelector(".container-1");
 var difficultVersion = document.querySelector(".container-2");
 var mainPageMessage = document.querySelector(".main-page-message");
+var drawMessage = document.querySelector(".draw-message")
 var alternativePageMessage = document.querySelector(".alternative-page-message");
 var classicOptionIcons = document.querySelector(".classic-option-icons");
 var difficultOptionIcons = document.querySelector(".difficult-option-icons");
@@ -17,9 +18,9 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 classicVersion.addEventListener('click', displayClassic)
 difficultVersion.addEventListener('click', displayDifficult)
 
-classicOptionIcons.addEventListener('click', function(e) {
+classicOptionIcons.addEventListener('click', function (e) {
   if (e.target.classList.contains('happy')) {
-      console.log("fuck")
+    winConditions(e)
   }
 })
 
@@ -28,32 +29,49 @@ classicOptionIcons.addEventListener('click', function(e) {
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
-function createPlayer(name, token, wins) {
+function createPlayer() {
   var player = {
-    name: name,
-    token: token,
-    wins: wins,
+    name: "Human" || "Computer",
+    token: "👩🏼" || "💻",
+    wins: 0
   }
+  return player
 }
 
-function createGame () {
-  var player1 = {
-    currentWins,
-
-  }
-  var player2 = {
-    currentWins,
-  }
+function createGame() {
+  var players = [
+    {
+      name: "Player 1",
+      gameType: gameType,
+      fighter: "unknown",
+      currentWins: 0
+    },
+    {
+      name: "Player 2",
+      fighter: "unknown",
+      gameType: gameType,
+      currentWins: 0
+    }
+  ]
+  return players
 }
 
 // display functions
 
-// function computerChoice() {
-//   for (var i = 0; i < fighters.length; i++) {
-//     console.log(fighters[i])
-//     show(fighters[i])
-//   }
-// }
+function winConditions(e) {
+  if (e.target.id === randomIcon(classicFighters)) {
+    show(drawMessage)
+    hide(alternativePageMessage)
+    
+  }
+}
+
+function randomIcon(array) {
+  var random = Math.floor(Math.random() * array.length)
+  var item = array[random]
+  return item.id
+}
+
 
 function hide(element) {
   element.setAttribute("hidden", "")
@@ -78,6 +96,16 @@ function displayDifficult() {
   hide(difficultVersion);
   show(classicOptionIcons);
   show(difficultOptionIcons)
+}
+
+function displayHome() {
+  hide(alternativePageMessage);
+  show(mainPageMessage);
+  show(classicVersion);
+  show(difficultVersion);
+  hide(classicOptionIcons);
+  hide(difficultOptionIcons)
+  hide(drawMessage)
 }
 
 
