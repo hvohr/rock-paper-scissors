@@ -31,21 +31,20 @@ classicOptionIcons.addEventListener('click', function (e) {
   if (e.target.classList.contains("happy")) {
     var opponent = randomIcon(classicFighters)
     var winner = evaluateWinner(e.target.id, opponent)
-    console.log("winner =", winner)
     if (opponent === e.target.id) {
-      console.log("opponent === e.target.id")
       show(drawMessage)
     } else if (winner === opponent) {
-      console.log("winner === opponent")
       show(computerWinnerMessage)
     } else {
-      console.log("winner is human")
       show(humanWinnerMessage)
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
-    showWinner(winner)
+    showResults(e.target.id, opponent)
+    show(resultsIcons)
     setTimeout(displayHome, 3000)
+    setTimeout(removeNewIcon, 3000)
+    setTimeout(removeNewIcon, 3000)
   }
 })
 
@@ -54,53 +53,72 @@ classicOptionIcons.addEventListener('click', function (e) {
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
-// var player = {
-//   name: "Human" || "Computer",
-//   token: "👩🏼" || "💻",
-//   wins: 0
-// }
+// Data Models
+function createPlayer(name, token, wins) {
+  var player = {
+    name: name,
+    token: token,
+    wins: wins
+}
+ return player
+}
 
-
-var players = [
+function createGame(fighter, gameType) { 
+  var players = [
   {
-    name: "Player 1",
+    fighter: fighter,
     gameType: gameType,
-    fighter: "unknown",
-    currentWins: 0
+    gameResult: []
   },
   {
-    name: "Player 2",
-    fighter: "unknown",
+    fighter: fighter,
     gameType: gameType,
-    currentWins: 0
+    gameResult: []
   }
 ]
+return players;
+}
+
 
 // display functions
 
-function showWinner(id) {
-  // show(resultsIcons)
-  var elem = document.createElement("img");
-  var imageName = id.substr(0, id.indexOf('-icon'))
-  elem.setAttribute("src", `./assets/${imageName}.png`);
-  console.log(imageName)
-  elem.setAttribute("id", id);
-  document.getElementById("result").appendChild(elem);
+function removeNewIcon() {
+  resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
 
-// function showResults(winner, loser) {
-//   // show(resultsHolder)
-//   var winnerImg = document.createElement("img");
-//   var winnerName = winner.substr(0, winner.indexOf('-icon'))
-//   winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
-//   winnerImg.setAttribute("id", winner);
-//   document.getElementById("result").appendChild(winnerImg); 
-//   var loserImg = document.createElement("img");
-//   var loserName = loser.substr(0, loser.indexOf('-icon'))
-//   loserImg.setAttribute("src", `./assets/${loserName}.png`);
-//   loserImg.setAttribute("id", loser);
-//   document.getElementById("result").appendChild(loserImg);
-// }
+// function showWinner(id) {
+//   // show(resultsIcons)
+//   var elem = document.createElement("img");
+//   var imageName = id.substr(0, id.indexOf('-icon'))
+//   elem.setAttribute("src", `./assets/${imageName}.png`);
+//   console.log(imageName)
+//   elem.setAttribute("id", id);
+//   document.getElementById("result").appendChild(elem);
+//   }
+
+// function showLoser(id) {
+//   var elem = document.createElement("img");
+//   var imageName = id.substr(0, id.indexOf('-icon'))
+//   elem.setAttribute("src", `./assets/${imageName}.png`);
+//   console.log(imageName)
+//   elem.setAttribute("id", id);
+//   document.getElementById("result").appendChild(elem);
+//   }
+
+
+function showResults(winner, loser) {
+  // show(resultsHolder)
+  var winnerImg = document.createElement("img");
+  var winnerName = winner.substr(0, winner.indexOf('-icon'))
+  winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
+  winnerImg.setAttribute("id", winner);
+  document.getElementById("result").appendChild(winnerImg); 
+  var loserImg = document.createElement("img");
+  var loserName = loser.substr(0, loser.indexOf('-icon'))
+  loserImg.setAttribute("src", `./assets/${loserName}.png`);
+  loserImg.setAttribute("id", loser);
+  document.getElementById("result").appendChild(loserImg);
+}
 
 function hideResultMessage() {
   hide(computerWinnerMessage)
@@ -150,6 +168,7 @@ function displayClassic() {
   hide(classicVersion);
   hide(difficultVersion);
   show(classicOptionIcons);
+
 }
 
 function displayDifficult() {
