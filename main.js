@@ -20,14 +20,10 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 //Event Listeners
 
 classicVersion.addEventListener('click', displayClassic)
+changeGameButton.addEventListener('click', displayHome)
 // difficultVersion.addEventListener('click', displayDifficult)
 
 classicOptionIcons.addEventListener('click', function (e) {
-  // 1. User clicks on an icon
-  // 2. Check whether or not its a valid player icon 
-  // 3. Generate oponent results (random)
-  // 4. Compare user and oponent result to evaluate win
-  // 5. Display winner information
   if (e.target.classList.contains("happy")) {
     var opponent = randomIcon(classicFighters)
     var winner = evaluateWinner(e.target.id, opponent)
@@ -42,9 +38,10 @@ classicOptionIcons.addEventListener('click', function (e) {
     hide(classicOptionIcons)
     showResults(e.target.id, opponent)
     show(resultsIcons)
-    setTimeout(displayHome, 3000)
+    setTimeout(displayClassic, 3000)
     setTimeout(removeNewIcon, 3000)
     setTimeout(removeNewIcon, 3000)
+    show(changeGameButton)
   }
 })
 
@@ -54,7 +51,7 @@ var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
 // Data Models
-function createPlayer(name, token, wins) {
+function createPlayer(name, token, wins = 0) {
   var player = {
     name: name,
     token: token,
@@ -79,32 +76,11 @@ function createGame(fighter, gameType) {
 return players;
 }
 
-
 // display functions
 
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
-
-// function showWinner(id) {
-//   // show(resultsIcons)
-//   var elem = document.createElement("img");
-//   var imageName = id.substr(0, id.indexOf('-icon'))
-//   elem.setAttribute("src", `./assets/${imageName}.png`);
-//   console.log(imageName)
-//   elem.setAttribute("id", id);
-//   document.getElementById("result").appendChild(elem);
-//   }
-
-// function showLoser(id) {
-//   var elem = document.createElement("img");
-//   var imageName = id.substr(0, id.indexOf('-icon'))
-//   elem.setAttribute("src", `./assets/${imageName}.png`);
-//   console.log(imageName)
-//   elem.setAttribute("id", id);
-//   document.getElementById("result").appendChild(elem);
-//   }
-
 
 function showResults(winner, loser) {
   // show(resultsHolder)
@@ -125,7 +101,6 @@ function hideResultMessage() {
   hide(humanWinnerMessage)
   hide(drawMessage)
 }
-
 
 function evaluateWinner(userIcon, opponentIcon) {
   console.log(userIcon, opponentIcon)
@@ -168,7 +143,7 @@ function displayClassic() {
   hide(classicVersion);
   hide(difficultVersion);
   show(classicOptionIcons);
-
+  hideResultMessage()
 }
 
 function displayDifficult() {
@@ -187,5 +162,6 @@ function displayHome() {
   show(difficultVersion);
   hide(classicOptionIcons);
   hide(difficultOptionIcons)
+  hide(changeGameButton)
   hideResultMessage()
 }
