@@ -20,6 +20,7 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 //Event Listeners
 
 classicVersion.addEventListener('click', displayClassic)
+changeGameButton.addEventListener('click', displayHome)
 // difficultVersion.addEventListener('click', displayDifficult)
 
 classicOptionIcons.addEventListener('click', function (e) {
@@ -40,6 +41,7 @@ classicOptionIcons.addEventListener('click', function (e) {
     setTimeout(displayClassic, 3000)
     setTimeout(removeNewIcon, 3000)
     setTimeout(removeNewIcon, 3000)
+    show(changeGameButton)
   }
 })
 
@@ -49,7 +51,7 @@ var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
 // Data Models
-function createPlayer(name, token, wins) {
+function createPlayer(name, token, wins = 0) {
   var player = {
     name: name,
     token: token,
@@ -160,5 +162,6 @@ function displayHome() {
   show(difficultVersion);
   hide(classicOptionIcons);
   hide(difficultOptionIcons)
+  hide(changeGameButton)
   hideResultMessage()
 }
