@@ -33,15 +33,19 @@ classicOptionIcons.addEventListener('click', function (e) {
     var winner = evaluateWinner(e.target.id, opponent)
     console.log("winner =", winner)
     if (opponent === e.target.id) {
+      console.log("opponent === e.target.id")
       show(drawMessage)
     } else if (winner === opponent) {
+      console.log("winner === opponent")
       show(computerWinnerMessage)
     } else {
+      console.log("winner is human")
       show(humanWinnerMessage)
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
-    show(resultsIcons)
+    showWinner(winner)
+    setTimeout(displayHome, 3000)
   }
 })
 
@@ -57,33 +61,51 @@ var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // }
 
 
-
-
-// var players = [
-//   {
-//     name: "Player 1",
-//     gameType: gameType,
-//     fighter: "unknown",
-//     currentWins: 0
-//   },
-//   {
-//     name: "Player 2",
-//     fighter: "unknown",
-//     gameType: gameType,
-//     currentWins: 0
-//   }
-// ]
+var players = [
+  {
+    name: "Player 1",
+    gameType: gameType,
+    fighter: "unknown",
+    currentWins: 0
+  },
+  {
+    name: "Player 2",
+    fighter: "unknown",
+    gameType: gameType,
+    currentWins: 0
+  }
+]
 
 // display functions
 
-function showResults() {
-  resultsIcons.innerHTML = '';
-  resultsIcons.innerHTML = `<div class="results-icons">
-                        ${winConditions()}}
-                        ${winConditions()} 
-                        </div                          
-    `
-  console.log(winConditions())
+function showWinner(id) {
+  // show(resultsIcons)
+  var elem = document.createElement("img");
+  var imageName = id.substr(0, id.indexOf('-icon'))
+  elem.setAttribute("src", `./assets/${imageName}.png`);
+  console.log(imageName)
+  elem.setAttribute("id", id);
+  document.getElementById("result").appendChild(elem);
+}
+
+// function showResults(winner, loser) {
+//   // show(resultsHolder)
+//   var winnerImg = document.createElement("img");
+//   var winnerName = winner.substr(0, winner.indexOf('-icon'))
+//   winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
+//   winnerImg.setAttribute("id", winner);
+//   document.getElementById("result").appendChild(winnerImg); 
+//   var loserImg = document.createElement("img");
+//   var loserName = loser.substr(0, loser.indexOf('-icon'))
+//   loserImg.setAttribute("src", `./assets/${loserName}.png`);
+//   loserImg.setAttribute("id", loser);
+//   document.getElementById("result").appendChild(loserImg);
+// }
+
+function hideResultMessage() {
+  hide(computerWinnerMessage)
+  hide(humanWinnerMessage)
+  hide(drawMessage)
 }
 
 
@@ -106,62 +128,6 @@ function evaluateWinner(userIcon, opponentIcon) {
   }
 }
 
-
-
-
-// function winConditions(e) {
-//   var random = randomIcon(classicFighters)
-//   if (e.target.id === "happy-scissors-icon" && random === "happy-rock-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     show(resultsIcons)
-//     return random
-//   } else if (e.target.id === "happy-rocks-icon" && random === "happy-scissors-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     show(resultsIcons)
-//     return e.target
-//   } else if (e.target.id === "happy-scissors-icon" && random === "happy-paper-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     return e.target
-//   } else if (e.target.id === "happy-paper-icon" && random === "happy-scissors-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     show(resultsIcons)
-//     return random
-//   } else if (e.target.id === "happy-paper-icon" && random === "happy-rocks-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     show(resultsIcons)
-//     return e.target
-//   } else if (e.target.id === "happy-rocks-icon" && random === "happy-paper-icon") {
-//     show(computerWinnerMessage)
-//     hide(alternativePageMessage)
-//     hide(classicOptionIcons)
-//     show(resultsIcons)
-//     return random
-//   }
-
-
-//DRAW ISSUE
-// if (e.target === randomIcon(classicFighters)) {
-//   console.log(e.target)
-//   console.log(randomIcon(classicFighters))
-//   show(drawMessage)
-//   hide(alternativePageMessage)
-//   hide(paperIcon)
-//   hide(scissorsIcon)
-//   hide(rocksIcon)
-//   show(e.target)
-
-// make a new div with two inserts to place the two images that populates inside it and then hide everything else 
-// 
 
 
 function randomIcon(array) {
@@ -202,5 +168,5 @@ function displayHome() {
   show(difficultVersion);
   hide(classicOptionIcons);
   hide(difficultOptionIcons)
-  hide(drawMessage)
+  hideResultMessage()
 }
