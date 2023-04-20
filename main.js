@@ -40,9 +40,10 @@ classicOptionIcons.addEventListener('click', function (e) {
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
-    showWinner(winner)
+    showResults(e.target.id, opponent)
     show(resultsIcons)
     setTimeout(displayHome, 3000)
+    setTimeout(removeNewIcon, 3000)
     setTimeout(removeNewIcon, 3000)
   }
 })
@@ -52,7 +53,7 @@ classicOptionIcons.addEventListener('click', function (e) {
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
-
+// Data Models
 function createPlayer(name, token, wins) {
   var player = {
     name: name,
@@ -79,37 +80,45 @@ return players;
 }
 
 
+// display functions
 
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
-// display functions
 
-function showWinner(id) {
-  // show(resultsIcons)
-  var elem = document.createElement("img");
-  var imageName = id.substr(0, id.indexOf('-icon'))
-  elem.setAttribute("src", `./assets/${imageName}.png`);
-  console.log(imageName)
-  elem.setAttribute("id", id);
-  document.getElementById("result").appendChild(elem);
-  }
+// function showWinner(id) {
+//   // show(resultsIcons)
+//   var elem = document.createElement("img");
+//   var imageName = id.substr(0, id.indexOf('-icon'))
+//   elem.setAttribute("src", `./assets/${imageName}.png`);
+//   console.log(imageName)
+//   elem.setAttribute("id", id);
+//   document.getElementById("result").appendChild(elem);
+//   }
+
+// function showLoser(id) {
+//   var elem = document.createElement("img");
+//   var imageName = id.substr(0, id.indexOf('-icon'))
+//   elem.setAttribute("src", `./assets/${imageName}.png`);
+//   console.log(imageName)
+//   elem.setAttribute("id", id);
+//   document.getElementById("result").appendChild(elem);
+//   }
 
 
-
-// function showResults(winner, loser) {
-//   // show(resultsHolder)
-//   var winnerImg = document.createElement("img");
-//   var winnerName = winner.substr(0, winner.indexOf('-icon'))
-//   winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
-//   winnerImg.setAttribute("id", winner);
-//   document.getElementById("result").appendChild(winnerImg); 
-//   var loserImg = document.createElement("img");
-//   var loserName = loser.substr(0, loser.indexOf('-icon'))
-//   loserImg.setAttribute("src", `./assets/${loserName}.png`);
-//   loserImg.setAttribute("id", loser);
-//   document.getElementById("result").appendChild(loserImg);
-// }
+function showResults(winner, loser) {
+  // show(resultsHolder)
+  var winnerImg = document.createElement("img");
+  var winnerName = winner.substr(0, winner.indexOf('-icon'))
+  winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
+  winnerImg.setAttribute("id", winner);
+  document.getElementById("result").appendChild(winnerImg); 
+  var loserImg = document.createElement("img");
+  var loserName = loser.substr(0, loser.indexOf('-icon'))
+  loserImg.setAttribute("src", `./assets/${loserName}.png`);
+  loserImg.setAttribute("id", loser);
+  document.getElementById("result").appendChild(loserImg);
+}
 
 function hideResultMessage() {
   hide(computerWinnerMessage)
