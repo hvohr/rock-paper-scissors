@@ -43,6 +43,7 @@ classicOptionIcons.addEventListener('click', function (e) {
     showWinner(winner)
     show(resultsIcons)
     setTimeout(displayHome, 3000)
+    setTimeout(removeNewIcon, 3000)
   }
 })
 
@@ -79,6 +80,9 @@ return players;
 
 
 
+function removeNewIcon() {
+  resultsIcons.removeChild(resultsIcons.firstElementChild);
+}
 // display functions
 
 function showWinner(id) {
