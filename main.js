@@ -31,20 +31,17 @@ classicOptionIcons.addEventListener('click', function (e) {
   if (e.target.classList.contains("happy")) {
     var opponent = randomIcon(classicFighters)
     var winner = evaluateWinner(e.target.id, opponent)
-    console.log("winner =", winner)
     if (opponent === e.target.id) {
-      console.log("opponent === e.target.id")
       show(drawMessage)
     } else if (winner === opponent) {
-      console.log("winner === opponent")
       show(computerWinnerMessage)
     } else {
-      console.log("winner is human")
       show(humanWinnerMessage)
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
     showWinner(winner)
+    show(resultsIcons)
     setTimeout(displayHome, 3000)
   }
 })
@@ -54,27 +51,33 @@ classicOptionIcons.addEventListener('click', function (e) {
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
-// var player = {
-//   name: "Human" || "Computer",
-//   token: "👩🏼" || "💻",
-//   wins: 0
-// }
 
+function createPlayer(name, token, wins) {
+  var player = {
+    name: name,
+    token: token,
+    wins: wins
+}
+ return player
+}
 
-var players = [
+function createGame(fighter, gameType) { 
+  var players = [
   {
-    name: "Player 1",
+    fighter: fighter,
     gameType: gameType,
-    fighter: "unknown",
-    currentWins: 0
+    gameResult: []
   },
   {
-    name: "Player 2",
-    fighter: "unknown",
+    fighter: fighter,
     gameType: gameType,
-    currentWins: 0
+    gameResult: []
   }
 ]
+return players;
+}
+
+
 
 // display functions
 
@@ -86,7 +89,9 @@ function showWinner(id) {
   console.log(imageName)
   elem.setAttribute("id", id);
   document.getElementById("result").appendChild(elem);
-}
+  }
+
+
 
 // function showResults(winner, loser) {
 //   // show(resultsHolder)
@@ -150,6 +155,7 @@ function displayClassic() {
   hide(classicVersion);
   hide(difficultVersion);
   show(classicOptionIcons);
+
 }
 
 function displayDifficult() {
