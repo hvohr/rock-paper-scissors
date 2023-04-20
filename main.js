@@ -9,26 +9,39 @@ var difficultOptionIcons = document.querySelector(".difficult-option-icons");
 var changeGameButton = document.querySelector(".change-game-button");
 var humanWinnerMessage = document.querySelector(".human-winner-message");
 var computerWinnerMessage = document.querySelector(".computer-winner-message");
+var resultsIcons = document.querySelector(".results-icons")
 //icons
 var paperIcon = document.querySelector("#happy-paper-icon");
 var scissorsIcon = document.querySelector("#happy-scissors-icon");
 var rocksIcon = document.querySelector("#happy-rocks-icon");
 var alienIcon = document.querySelector("#happy-alien-icon");
 var lizardIcon = document.querySelector("#happy-lizard-icon");
-//computer icons
-// var compPaperIcon = document.querySelector("#computer-paper-icon");
-// var compScissorsIcon = document.querySelector("#computer-scissors-icon");
-// var compRocksIcon = document.querySelector("#computer-rocks-icon");
-// var alienIcon = document.querySelector("#computer-alien-icon");
-// var lizardIcon = document.querySelector("#computer-lizard-icon");
+
 //Event Listeners
 
 classicVersion.addEventListener('click', displayClassic)
 // difficultVersion.addEventListener('click', displayDifficult)
 
 classicOptionIcons.addEventListener('click', function (e) {
-  if (e.target.classList.contains('happy')) {
-    winConditions(e)
+  // 1. User clicks on an icon
+  // 2. Check whether or not its a valid player icon 
+  // 3. Generate oponent results (random)
+  // 4. Compare user and oponent result to evaluate win
+  // 5. Display winner information
+  if (e.target.classList.contains("happy")) {
+    var opponent = randomIcon(classicFighters)
+    var winner = evaluateWinner(e.target.id, opponent)
+    console.log("winner =", winner)
+    if (opponent === e.target.id) {
+      show(drawMessage)
+    } else if (winner === opponent) {
+      show(computerWinnerMessage)
+    } else {
+      show(humanWinnerMessage)
+    }
+    hide(alternativePageMessage)
+    hide(classicOptionIcons)
+    show(resultsIcons)
   }
 })
 
@@ -37,97 +50,118 @@ classicOptionIcons.addEventListener('click', function (e) {
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 // var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
-function createPlayer() {
-  var player = {
-    name: "Human" || "Computer",
-    token: "👩🏼" || "💻",
-    wins: 0
-  }
-  return player
-}
+// var player = {
+//   name: "Human" || "Computer",
+//   token: "👩🏼" || "💻",
+//   wins: 0
+// }
 
-function createGame() {
-  var players = [
-    {
-      name: "Player 1",
-      gameType: gameType,
-      fighter: "unknown",
-      currentWins: 0
-    },
-    {
-      name: "Player 2",
-      fighter: "unknown",
-      gameType: gameType,
-      currentWins: 0
-    }
-  ]
-  return players
-}
+
+
+
+// var players = [
+//   {
+//     name: "Player 1",
+//     gameType: gameType,
+//     fighter: "unknown",
+//     currentWins: 0
+//   },
+//   {
+//     name: "Player 2",
+//     fighter: "unknown",
+//     gameType: gameType,
+//     currentWins: 0
+//   }
+// ]
 
 // display functions
 
-function winConditions(e) {
-  console.log(randomIcon(classicFighters))
-  console.log(e.target.id)
-  if (e.target.id === "happy-scissors-icon" && randomIcon(classicFighters) === "happy-rock-icon") {
-    console.log(randomIcon(classicFighters))
-    show(computerWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(randomIcon(classicFighters));
-  } else if (e.target.id === "happy-rocks-icon" && randomIcon(classicFighters) === "happy-scissors-icon") {
-    show(humanWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(e.target);
-  } else if (e.target.id === "happy-scissors-icon" && randomIcon(classicFighters) === "happy-paper-icon") {
-    show(humanWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(e.target);
-  } else if (e.target.id === "happy-paper-icon" && randomIcon(classicFighters) === "happy-scissors-icon") {
-    show(computerWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(randomIcon(classicFighters));
-  } else if (e.target.id === "happy-paper-icon" && randomIcon(classicFighters) === "happy-rocks-icon") {
-    show(humanWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(e.target);
-  } else if (e.target.id === "happy-rocks-icon" && randomIcon(classicFighters) === "happy-paper-icon") {
-    show(computerWinnerMessage)
-    hide(alternativePageMessage)
-    hide(paperIcon)
-    hide(scissorsIcon)
-    hide(rocksIcon)
-    show(randomIcon(classicFighters));
+function showResults() {
+  resultsIcons.innerHTML = '';
+  resultsIcons.innerHTML = `<div class="results-icons">
+                        ${winConditions()}}
+                        ${winConditions()} 
+                        </div                          
+    `
+  console.log(winConditions())
+}
+
+
+function evaluateWinner(userIcon, opponentIcon) {
+  console.log(userIcon, opponentIcon)
+  if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-rocks-icon") {
+    return opponentIcon
+  } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-scissors-icon") {
+    return userIcon
+  } else if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-paper-icon") {
+    return opponentIcon
+  } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-scissors-icon") {
+    return opponentIcon
+  } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-rocks-icon") {
+    return userIcon
+  } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-paper-icon") {
+    return opponentIcon
+  } else {
+    return userIcon
   }
 }
 
 
-console.log(winConditions());
+
+
+// function winConditions(e) {
+//   var random = randomIcon(classicFighters)
+//   if (e.target.id === "happy-scissors-icon" && random === "happy-rock-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     show(resultsIcons)
+//     return random
+//   } else if (e.target.id === "happy-rocks-icon" && random === "happy-scissors-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     show(resultsIcons)
+//     return e.target
+//   } else if (e.target.id === "happy-scissors-icon" && random === "happy-paper-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     return e.target
+//   } else if (e.target.id === "happy-paper-icon" && random === "happy-scissors-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     show(resultsIcons)
+//     return random
+//   } else if (e.target.id === "happy-paper-icon" && random === "happy-rocks-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     show(resultsIcons)
+//     return e.target
+//   } else if (e.target.id === "happy-rocks-icon" && random === "happy-paper-icon") {
+//     show(computerWinnerMessage)
+//     hide(alternativePageMessage)
+//     hide(classicOptionIcons)
+//     show(resultsIcons)
+//     return random
+//   }
+
 
 //DRAW ISSUE
-  // if (e.target === randomIcon(classicFighters)) {
-  //   console.log(e.target)
-  //   console.log(randomIcon(classicFighters))
-  //   show(drawMessage)
-  //   hide(alternativePageMessage)
-  //   hide(paperIcon)
-  //   hide(scissorsIcon)
-  //   hide(rocksIcon)
-  //   show(e.target)
+// if (e.target === randomIcon(classicFighters)) {
+//   console.log(e.target)
+//   console.log(randomIcon(classicFighters))
+//   show(drawMessage)
+//   hide(alternativePageMessage)
+//   hide(paperIcon)
+//   hide(scissorsIcon)
+//   hide(rocksIcon)
+//   show(e.target)
+
+// make a new div with two inserts to place the two images that populates inside it and then hide everything else 
+// 
 
 
 function randomIcon(array) {
