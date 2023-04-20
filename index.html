@@ -22,6 +22,9 @@
       <h1>Rock, Paper, Scissors</h1>
       <h2 class = "main-page-message">Choose your game!</h2>
       <h2 hidden class = "alternative-page-message">Choose your fighter!</h2>
+      <h2 hidden class = "computer-winner-message">💻Computer won this round!💻</h2>
+      <h2 hidden class = "human-winner-message">👩🏼You won this round!👩🏼</h2>
+      <h2 hidden class = "draw-message">🥲It's a draw!🥲</h2>
     </section>
     <section class="game-types">
       <div class="container-1">
@@ -41,12 +44,14 @@
     </section>
     <form class="version-options">
       <div class="classic-option-icons" hidden>
-        <img class = "happy-paper" src="./assets/happy-paper.png" id = "happy-paper-icon" alt = "cartoon smiling piece of paper">
-        <img class = "happy-scissors" src="./assets/happy-scissors.png" id = "happy-scissors-icon" alt = "open cartoon scissors">
-        <img class = "happy-rocks" src="./assets/happy-rocks.png" id = "happy-rocks-icon" alt = "two cartoon smiling rocks next to eachother">
+        <img class = "happy" src="./assets/happy-paper.png" id = "happy-paper-icon" alt = "cartoon smiling piece of paper">
+        <img class = "happy" src="./assets/happy-scissors.png" id = "happy-scissors-icon" alt = "open cartoon scissors">
+        <img class = "happy" src="./assets/happy-rocks.png" id = "happy-rocks-icon" alt = "two cartoon smiling rocks next to eachother">
       <div class = "difficult-option-icons" hidden>
-        <img class = "happy-lizard" src="./assets/lizard.png" id = "happy-lizard-icon" alt = "cartoon green lizard">
-        <img class = "happy-alien" src="./assets/happy-alien.png" id = "happy-alien-icon" alt = "cartoon smiling alien with two antenna">
+        <img class = "happy" src="./assets/happy-lizard.png" id = "happy-lizard-icon" alt = "cartoon green lizard">
+        <img class = "happy" src="./assets/happy-alien.png" id = "happy-alien-icon" alt = "cartoon smiling alien with two antenna">
+      </div>
+      <div class = "results-icons" id = "result">
       </div>
     </form>
   </main>
@@ -57,5 +62,4 @@
   </aside>
   <script type="text/javascript" src="main.js"></script>
 </body>
-
 </html>
