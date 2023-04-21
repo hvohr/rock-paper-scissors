@@ -31,6 +31,7 @@ body {
   width: 20%;
   text-align: center;
   background-color: #538059;
+  align-items: center;
 }
 
 .human-emoji,
@@ -105,9 +106,4 @@ button {
   cursor: pointer;
   margin: 15px;
   border: 0;
-}
-
-.human-side {
-  flex: display;
-  align-items: center;
 }
