@@ -18,9 +18,6 @@ var alienIcon = document.querySelector("#happy-alien-icon");
 var lizardIcon = document.querySelector("#happy-lizard-icon");
 
 //Event Listeners
-
-console.log(classicOptionIcons)
-
 var difficulty = "classic"
 
 classicVersion.addEventListener('click', displayClassic)
@@ -30,15 +27,14 @@ difficultVersion.addEventListener('click', displayDifficult)
 if (difficulty === "classic") {
   classicOptionIcons.addEventListener('click', classicVersionTest)
 } else {
-  difficultVersion.addEventListener('click', 'tbd')
+  difficultOptionIcons.addEventListener('click', difficultVersionTest)
+  classicOptionIcons.addEventListener('click', difficultVersionTest)
 }
-
-// classicOptionIcons.addEventListener('click', )
 
 // Global Variables
 
 var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
-// var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
+var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
 // Data Models
 function createPlayer(name, token, wins = 0) {
@@ -89,6 +85,29 @@ function classicVersionTest(e) {
   }
 }
 
+function difficultVersionTest(e) {
+  if (e.target.classList.contains("happy") && difficulty === "difficult") {
+    var opponent = randomIcon(difficultFighters)
+    var winner = evaluateWinnerDifficult(e.target.id, opponent)
+    if (opponent === e.target.id) {
+      show(drawMessage)
+    } else if (winner === opponent) {
+      show(computerWinnerMessage)
+    } else {
+      show(humanWinnerMessage)
+    }
+    hide(alternativePageMessage)
+    hide(classicOptionIcons)
+    hide(difficultOptionIcons)
+    showResults(e.target.id, opponent)
+    show(resultsIcons)
+    setTimeout(displayDifficult, 3000)
+    setTimeout(removeNewIcon, 2900)
+    setTimeout(removeNewIcon, 2900)
+    show(changeGameButton)
+  }
+}
+
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
@@ -112,8 +131,6 @@ function hideResultMessage() {
   hide(drawMessage)
 }
 
-
-
 // refactor to be better (needs less conditions - section into wins and loses)
 function evaluateWinner(userIcon, opponentIcon) {
   console.log(userIcon, opponentIcon)
@@ -128,6 +145,22 @@ function evaluateWinner(userIcon, opponentIcon) {
   } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-rocks-icon") {
     return userIcon
   } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-paper-icon") {
+    return opponentIcon
+  } else {
+    return userIcon
+  }
+}
+
+function evaluateWinnerDifficult(userIcon, opponentIcon) {
+  if (userIcon === "happy-scissors-icon" && (opponentIcon === "happy-paper-icon" || opponentIcon === "happy-lizard-icon")) {
+    return userIcon
+  } else if (userIcon === "happy-rocks-icon" && (opponentIcon === "happy-scissors-icon" || opponentIcon === "happy-lizard-icon")) {
+    return userIcon
+  } else if (userIcon === "happy-paper-icon" && (opponentIcon === "happy-rock-icon" & opponentIcon === "happy-alien-icon")) {
+    return userIcon
+  } else if (userIcon === "happy-lizard-icon" && (opponentIcon === "happy-paper-icon" || opponentIcon === "happy-alien-icon")) {
+    return opponentIcon
+  } else if (userIcon === "happy-alien-icon" && (opponentIcon === "happy-rocks-icon" || opponentIcon === "happy-scissors-icon")) {
     return opponentIcon
   } else {
     return userIcon
