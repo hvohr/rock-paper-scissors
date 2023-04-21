@@ -19,17 +19,18 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 
 //Event Listeners
 var difficulty = "classic"
+if (difficulty === "difficult") {
+  classicOptionIcons.addEventListener('click', difficultVersionTest)
+  difficultOptionIcons.addEventListener('click', difficultVersionTest)
+} else {
+  classicOptionIcons.addEventListener('click', classicVersionTest)
+}
 
 classicVersion.addEventListener('click', displayClassic)
-changeGameButton.addEventListener('click', displayHome)
-difficultVersion.addEventListener('click', displayDifficult)
 
-if (difficulty === "classic") {
-  classicOptionIcons.addEventListener('click', classicVersionTest)
-} else {
-  difficultOptionIcons.addEventListener('click', difficultVersionTest)
-  classicOptionIcons.addEventListener('click', difficultVersionTest)
-}
+changeGameButton.addEventListener('click', displayHome)
+
+difficultVersion.addEventListener('click', displayDifficult)
 
 // Global Variables
 
@@ -42,28 +43,31 @@ function createPlayer(name, token, wins = 0) {
     name: name,
     token: token,
     wins: wins
-}
- return player
+  }
+  return player
 }
 
-function createGame(fighter, gameType) { 
+function createGame(fighter, gameType) {
   var players = [
-  {
-    fighter: fighter,
-    gameType: gameType,
-    gameResult: []
-  },
-  {
-    fighter: fighter,
-    gameType: gameType,
-    gameResult: []
-  }
-]
-return players;
+    {
+      fighter: fighter,
+      gameType: gameType,
+      gameResult: []
+    },
+    {
+      fighter: fighter,
+      gameType: gameType,
+      gameResult: []
+    }
+  ]
+  return players;
 }
 
 // display functions
 function classicVersionTest(e) {
+  console.log(classicOptionIcons)
+  console.log(difficultOptionIcons)
+  console.log(difficulty)
   if (e.target.classList.contains("happy") && difficulty === "classic") {
     var opponent = randomIcon(classicFighters)
     var winner = evaluateWinner(e.target.id, opponent)
@@ -77,16 +81,19 @@ function classicVersionTest(e) {
     hide(alternativePageMessage)
     hide(classicOptionIcons)
     showResults(e.target.id, opponent)
-    show(resultsIcons)
-    setTimeout(displayClassic, 3000)
-    setTimeout(removeNewIcon, 2900)
-    setTimeout(removeNewIcon, 2900)
+    setTimeout(displayClassic, 2000)
+    setTimeout(removeNewIcon, 1900)
+    setTimeout(removeNewIcon, 1900)
     show(changeGameButton)
   }
 }
 
 function difficultVersionTest(e) {
+  console.log(classicOptionIcons)
+  console.log(difficultOptionIcons)
+  console.log(difficulty)
   if (e.target.classList.contains("happy") && difficulty === "difficult") {
+    console.log(e.target.id)
     var opponent = randomIcon(difficultFighters)
     var winner = evaluateWinnerDifficult(e.target.id, opponent)
     if (opponent === e.target.id) {
@@ -100,10 +107,9 @@ function difficultVersionTest(e) {
     hide(classicOptionIcons)
     hide(difficultOptionIcons)
     showResults(e.target.id, opponent)
-    show(resultsIcons)
-    setTimeout(displayDifficult, 3000)
-    setTimeout(removeNewIcon, 2900)
-    setTimeout(removeNewIcon, 2900)
+    setTimeout(displayDifficult, 2000)
+    setTimeout(removeNewIcon, 1900)
+    setTimeout(removeNewIcon, 1900)
     show(changeGameButton)
   }
 }
@@ -117,7 +123,7 @@ function showResults(winner, loser) {
   var winnerName = winner.substr(0, winner.indexOf('-icon'))
   winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
   winnerImg.setAttribute("id", winner);
-  document.getElementById("result").appendChild(winnerImg); 
+  document.getElementById("result").appendChild(winnerImg);
   var loserImg = document.createElement("img");
   var loserName = loser.substr(0, loser.indexOf('-icon'))
   loserImg.setAttribute("src", `./assets/${loserName}.png`);
@@ -182,7 +188,8 @@ function show(element) {
 }
 
 function displayClassic() {
-  difficulty = "classic"
+  difficulty = "classic";
+  // console.log(difficulty)
   show(alternativePageMessage);
   hide(mainPageMessage);
   hide(classicVersion);
@@ -192,7 +199,9 @@ function displayClassic() {
 }
 
 function displayDifficult() {
-  difficulty = "difficult"
+  difficulty = "difficult";
+  classicOptionIcons.addEventListener('click', difficultVersionTest)
+  difficultOptionIcons.addEventListener('click', difficultVersionTest)
   show(alternativePageMessage);
   hide(mainPageMessage);
   hide(classicVersion);
