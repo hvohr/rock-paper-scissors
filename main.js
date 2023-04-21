@@ -10,6 +10,8 @@ var changeGameButton = document.querySelector(".change-game-button");
 var humanWinnerMessage = document.querySelector(".human-winner-message");
 var computerWinnerMessage = document.querySelector(".computer-winner-message");
 var resultsIcons = document.querySelector(".results-icons")
+var humanWinCount = document.querySelector(".human-win-count")
+var computerWinCount = document.querySelector(".computer-win-count")
 //icons
 var paperIcon = document.querySelector("#happy-paper-icon");
 var scissorsIcon = document.querySelector("#happy-scissors-icon");
@@ -74,14 +76,13 @@ function createGameClassic(e) {
     } else if (winner === opponent) {
       show(computerWinnerMessage)
       player2.wins++
-      console.log(player2)
     } else {
       show(humanWinnerMessage)
       player1.wins++
-      console.log(player1)
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
+    winCount()
     showResults(e.target.id, opponent)
     setTimeout(displayClassic, 2000)
     setTimeout(removeNewIcon, 1900)
@@ -100,14 +101,18 @@ function createGameDifficult(e) {
     var winner = evaluateWinnerDifficult(e.target.id, opponent)
     if (opponent === e.target.id) {
       show(drawMessage)
+
     } else if (winner === opponent) {
       show(computerWinnerMessage)
+      player2.wins++
     } else {
       show(humanWinnerMessage)
+      player1.wins++
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
     hide(difficultOptionIcons)
+    winCount()
     showResults(e.target.id, opponent)
     setTimeout(displayDifficult, 2000)
     setTimeout(removeNewIcon, 1900)
@@ -173,6 +178,11 @@ function evaluateWinnerDifficult(userIcon, opponentIcon) {
   } else {
     return userIcon
   }
+}
+
+function winCount() {
+  humanWinCount.innerText = `Wins: ${player1.wins}`
+  computerWinCount.innerText = `Wins: ${player2.wins}`
 }
 
 function randomIcon(array) {
