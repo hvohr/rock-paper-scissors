@@ -20,10 +20,10 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 //Event Listeners
 var difficulty = "classic"
 if (difficulty === "difficult") {
-  classicOptionIcons.addEventListener('click', difficultVersionTest)
-  difficultOptionIcons.addEventListener('click', difficultVersionTest)
+  classicOptionIcons.addEventListener('click', createGameDifficult)
+  difficultOptionIcons.addEventListener('click', createGameDifficult)
 } else {
-  classicOptionIcons.addEventListener('click', classicVersionTest)
+  classicOptionIcons.addEventListener('click', createGameClassic)
 }
 
 classicVersion.addEventListener('click', displayClassic)
@@ -38,33 +38,31 @@ var classicFighters = [paperIcon, scissorsIcon, rocksIcon]
 var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIcon]
 
 // Data Models
-function createPlayer(name, token, wins = 0) {
-  var player = {
-    name: name,
-    token: token,
-    wins: wins
-  }
-  return player
+
+var player1 = {
+  name: "Computer",
+  fighter: "unknown",
+  wins: 0
 }
 
-function createGame(fighter, gameType) {
-  var players = [
-    {
-      fighter: fighter,
-      gameType: gameType,
-      gameResult: []
-    },
-    {
-      fighter: fighter,
-      gameType: gameType,
-      gameResult: []
-    }
-  ]
-  return players;
+var player2 = {
+  name: "Human",
+  fighter: "unknown",
+  wins: 0
 }
+
+// function createPlayer(name, token, wins = 0) {
+//   var player = {
+//     name: name,
+//     token: token,
+//     wins: wins
+//   }
+//   return player
+// }
+
 
 // display functions
-function classicVersionTest(e) {
+function createGameClassic(e) {
   console.log(classicOptionIcons)
   console.log(difficultOptionIcons)
   console.log(difficulty)
@@ -75,8 +73,12 @@ function classicVersionTest(e) {
       show(drawMessage)
     } else if (winner === opponent) {
       show(computerWinnerMessage)
+      player2.wins++
+      console.log(player2)
     } else {
       show(humanWinnerMessage)
+      player1.wins++
+      console.log(player1)
     }
     hide(alternativePageMessage)
     hide(classicOptionIcons)
@@ -88,7 +90,7 @@ function classicVersionTest(e) {
   }
 }
 
-function difficultVersionTest(e) {
+function createGameDifficult(e) {
   console.log(classicOptionIcons)
   console.log(difficultOptionIcons)
   console.log(difficulty)
@@ -200,8 +202,8 @@ function displayClassic() {
 
 function displayDifficult() {
   difficulty = "difficult";
-  classicOptionIcons.addEventListener('click', difficultVersionTest)
-  difficultOptionIcons.addEventListener('click', difficultVersionTest)
+  classicOptionIcons.addEventListener('click', createGameDifficult)
+  difficultOptionIcons.addEventListener('click', createGameDifficult)
   show(alternativePageMessage);
   hide(mainPageMessage);
   hide(classicVersion);
