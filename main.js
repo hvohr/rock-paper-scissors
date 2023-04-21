@@ -184,22 +184,16 @@ function winCount() {
 }
 
 // Game Rules Functions
-// refactor to be better (needs less conditions - section into wins and loses)
+
 function evaluateWinner(userIcon, opponentIcon) {
-  if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-rocks-icon") {
-    return opponentIcon
+  if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-paper-icon") {
+    return userIcon
   } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-scissors-icon") {
     return userIcon
-  } else if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-paper-icon") {
-    return opponentIcon
-  } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-scissors-icon") {
-    return opponentIcon
-  } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-rocks-icon") {
+  } else if (userIcon === "happy-paper-icon" && opponentIcon === "happy-rock-icon") {
     return userIcon
-  } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-paper-icon") {
-    return opponentIcon
   } else {
-    return userIcon
+    return opponentIcon
   }
 }
 
@@ -211,10 +205,10 @@ function evaluateWinnerDifficult(userIcon, opponentIcon) {
   } else if (userIcon === "happy-paper-icon" && (opponentIcon === "happy-rock-icon" & opponentIcon === "happy-alien-icon")) {
     return userIcon
   } else if (userIcon === "happy-lizard-icon" && (opponentIcon === "happy-paper-icon" || opponentIcon === "happy-alien-icon")) {
-    return opponentIcon
-  } else if (userIcon === "happy-alien-icon" && (opponentIcon === "happy-rocks-icon" || opponentIcon === "happy-scissors-icon")) {
-    return opponentIcon
-  } else {
     return userIcon
+  } else if (userIcon === "happy-alien-icon" && (opponentIcon === "happy-rocks-icon" || opponentIcon === "happy-scissors-icon")) {
+    return userIcon
+  } else {
+    return opponentIcon
   }
 }
