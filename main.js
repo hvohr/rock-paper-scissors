@@ -1,4 +1,5 @@
 // DOM queries
+
 var classicVersion = document.querySelector(".container-1");
 var difficultVersion = document.querySelector(".container-2");
 var mainPageMessage = document.querySelector(".main-page-message");
@@ -12,7 +13,6 @@ var computerWinnerMessage = document.querySelector(".computer-winner-message");
 var resultsIcons = document.querySelector(".results-icons")
 var humanWinCount = document.querySelector(".human-win-count")
 var computerWinCount = document.querySelector(".computer-win-count")
-//icons
 var paperIcon = document.querySelector("#happy-paper-icon");
 var scissorsIcon = document.querySelector("#happy-scissors-icon");
 var rocksIcon = document.querySelector("#happy-rocks-icon");
@@ -20,6 +20,7 @@ var alienIcon = document.querySelector("#happy-alien-icon");
 var lizardIcon = document.querySelector("#happy-lizard-icon");
 
 //Event Listeners
+
 var difficulty = "classic"
 if (difficulty === "difficult") {
   classicOptionIcons.addEventListener('click', createGameDifficult)
@@ -27,11 +28,8 @@ if (difficulty === "difficult") {
 } else {
   classicOptionIcons.addEventListener('click', createGameClassic)
 }
-
 classicVersion.addEventListener('click', displayClassic)
-
 changeGameButton.addEventListener('click', displayHome)
-
 difficultVersion.addEventListener('click', displayDifficult)
 
 // Global Variables
@@ -53,27 +51,17 @@ var player2 = {
   wins: 0
 }
 
-// function createPlayer(name, token, wins = 0) {
-//   var player = {
-//     name: name,
-//     token: token,
-//     wins: wins
-//   }
-//   return player
-// }
+// Create Game Functions
 
-
-// display functions
 function createGameClassic(e) {
-  console.log(classicOptionIcons)
-  console.log(difficultOptionIcons)
-  console.log(difficulty)
   if (e.target.classList.contains("happy") && difficulty === "classic") {
     var opponent = randomIcon(classicFighters)
-    var winner = evaluateWinner(e.target.id, opponent)
-    if (opponent === e.target.id) {
+    var winner = evaluateWinner(player1.fighter, player2.fighter)
+    player2.fighter = opponent
+    player1.fighter = e.target.id
+    if (player2.fighter === player1.fighter) {
       show(drawMessage)
-    } else if (winner === opponent) {
+    } else if (winner === player2.fighter) {
       show(computerWinnerMessage)
       player2.wins++
     } else {
@@ -83,7 +71,7 @@ function createGameClassic(e) {
     hide(alternativePageMessage)
     hide(classicOptionIcons)
     winCount()
-    showResults(e.target.id, opponent)
+    showResults(player1.fighter, player2.fighter)
     setTimeout(displayClassic, 2000)
     setTimeout(removeNewIcon, 1900)
     setTimeout(removeNewIcon, 1900)
@@ -92,17 +80,14 @@ function createGameClassic(e) {
 }
 
 function createGameDifficult(e) {
-  console.log(classicOptionIcons)
-  console.log(difficultOptionIcons)
-  console.log(difficulty)
   if (e.target.classList.contains("happy") && difficulty === "difficult") {
-    console.log(e.target.id)
     var opponent = randomIcon(difficultFighters)
-    var winner = evaluateWinnerDifficult(e.target.id, opponent)
-    if (opponent === e.target.id) {
+    player2.fighter = opponent
+    player1.fighter = e.target.id
+    var winner = evaluateWinnerDifficult(player1.fighter, player2.fighter)
+    if (player2.fighter === player1.fighter) {
       show(drawMessage)
-
-    } else if (winner === opponent) {
+    } else if (winner === player2.fighter) {
       show(computerWinnerMessage)
       player2.wins++
     } else {
@@ -113,7 +98,7 @@ function createGameDifficult(e) {
     hide(classicOptionIcons)
     hide(difficultOptionIcons)
     winCount()
-    showResults(e.target.id, opponent)
+    showResults(player1.fighter, player2.fighter)
     setTimeout(displayDifficult, 2000)
     setTimeout(removeNewIcon, 1900)
     setTimeout(removeNewIcon, 1900)
@@ -121,6 +106,13 @@ function createGameDifficult(e) {
   }
 }
 
+function randomIcon(array) {
+  var random = Math.floor(Math.random() * array.length)
+  var item = array[random]
+  return item.id
+}
+
+// Display Functions
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
@@ -144,9 +136,56 @@ function hideResultMessage() {
   hide(drawMessage)
 }
 
+function hide(element) {
+  element.setAttribute("hidden", "")
+}
+
+function show(element) {
+  element.removeAttribute("hidden");
+}
+
+function displayClassic() {
+  difficulty = "classic";
+  show(alternativePageMessage);
+  hide(mainPageMessage);
+  hide(classicVersion);
+  hide(difficultVersion);
+  show(classicOptionIcons);
+  hideResultMessage()
+}
+
+function displayDifficult() {
+  difficulty = "difficult";
+  classicOptionIcons.addEventListener('click', createGameDifficult)
+  difficultOptionIcons.addEventListener('click', createGameDifficult)
+  show(alternativePageMessage);
+  hide(mainPageMessage);
+  hide(classicVersion);
+  hide(difficultVersion);
+  show(classicOptionIcons);
+  show(difficultOptionIcons)
+  hideResultMessage()
+}
+
+function displayHome() {
+  hide(alternativePageMessage);
+  show(mainPageMessage);
+  show(classicVersion);
+  show(difficultVersion);
+  hide(classicOptionIcons);
+  hide(difficultOptionIcons)
+  hide(changeGameButton)
+  hideResultMessage()
+}
+
+function winCount() {
+  humanWinCount.innerText = `Wins: ${player1.wins}`
+  computerWinCount.innerText = `Wins: ${player2.wins}`
+}
+
+// Game Rules Functions
 // refactor to be better (needs less conditions - section into wins and loses)
 function evaluateWinner(userIcon, opponentIcon) {
-  console.log(userIcon, opponentIcon)
   if (userIcon === "happy-scissors-icon" && opponentIcon === "happy-rocks-icon") {
     return opponentIcon
   } else if (userIcon === "happy-rocks-icon" && opponentIcon === "happy-scissors-icon") {
@@ -178,58 +217,4 @@ function evaluateWinnerDifficult(userIcon, opponentIcon) {
   } else {
     return userIcon
   }
-}
-
-function winCount() {
-  humanWinCount.innerText = `Wins: ${player1.wins}`
-  computerWinCount.innerText = `Wins: ${player2.wins}`
-}
-
-function randomIcon(array) {
-  var random = Math.floor(Math.random() * array.length)
-  var item = array[random]
-  return item.id
-}
-
-function hide(element) {
-  element.setAttribute("hidden", "")
-}
-
-function show(element) {
-  element.removeAttribute("hidden");
-}
-
-function displayClassic() {
-  difficulty = "classic";
-  // console.log(difficulty)
-  show(alternativePageMessage);
-  hide(mainPageMessage);
-  hide(classicVersion);
-  hide(difficultVersion);
-  show(classicOptionIcons);
-  hideResultMessage()
-}
-
-function displayDifficult() {
-  difficulty = "difficult";
-  classicOptionIcons.addEventListener('click', createGameDifficult)
-  difficultOptionIcons.addEventListener('click', createGameDifficult)
-  show(alternativePageMessage);
-  hide(mainPageMessage);
-  hide(classicVersion);
-  hide(difficultVersion);
-  show(classicOptionIcons);
-  show(difficultOptionIcons)
-  hideResultMessage()
-}
-
-function displayHome() {
-  hide(alternativePageMessage);
-  show(mainPageMessage);
-  show(classicVersion);
-  show(difficultVersion);
-  hide(classicOptionIcons);
-  hide(difficultOptionIcons)
-  hide(changeGameButton)
-  hideResultMessage()
 }
