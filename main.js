@@ -21,7 +21,6 @@ var lizardIcon = document.querySelector("#happy-lizard-icon");
 var compWinnerToken = document.querySelector(".computer-winner-token")
 var humanWinnerToken = document.querySelector(".human-winner-token")
 
-
 //Event Listeners
 
 var difficulty = "classic"
@@ -71,15 +70,8 @@ function createGameClassic(e) {
       show(humanWinnerMessage)
       player1.wins++
     }
-    hide(alternativePageMessage)
-    hide(classicOptionIcons)
-    winCount()
-    showWinnerToken()
-    showResults(player1.fighter, player2.fighter)
+    displayResult()
     setTimeout(displayClassic, 2000)
-    setTimeout(removeNewIcon, 1900)
-    setTimeout(removeNewIcon, 1900)
-    show(changeGameButton)
   }
 }
 
@@ -98,17 +90,21 @@ function createGameDifficult(e) {
       show(humanWinnerMessage)
       player1.wins++
     }
-    hide(alternativePageMessage)
-    hide(classicOptionIcons)
+    displayResult()
     hide(difficultOptionIcons)
-    winCount()
-    showWinnerToken()
-    showResults(player1.fighter, player2.fighter)
     setTimeout(displayDifficult, 2000)
-    setTimeout(removeNewIcon, 1900)
-    setTimeout(removeNewIcon, 1900)
-    show(changeGameButton)
   }
+}
+
+function displayResult() {
+  setTimeout(removeNewIcon, 1900)
+  setTimeout(removeNewIcon, 1900)
+  show(changeGameButton)
+  showResults(player1.fighter, player2.fighter)
+  winCount()
+  showWinnerToken()
+  hide(alternativePageMessage)
+  hide(classicOptionIcons)
 }
 
 function randomIcon(array) {
@@ -118,6 +114,7 @@ function randomIcon(array) {
 }
 
 // Display Functions
+
 function showWinnerToken() {
   if (player1.wins === player2.wins) {
     hide(humanWinnerToken)
@@ -130,7 +127,6 @@ function showWinnerToken() {
     show(compWinnerToken)
   }
 }
-
 
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
