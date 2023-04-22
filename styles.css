@@ -98,6 +98,7 @@ form {
   height: 65%;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 
 }
 
