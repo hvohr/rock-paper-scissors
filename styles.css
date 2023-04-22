@@ -1,7 +1,6 @@
 * {
   font-family: 'Urbanist', sans-serif;
   color: white;
-
 }
 
 body,
@@ -31,12 +30,20 @@ body {
   width: 20%;
   text-align: center;
   background-color: #538059;
+  align-items: center;
 }
 
 .human-emoji,
-.computer-emoji {
+.computer-emoji,
+.computer-winner-token,
+.human-winner-token {
   font-size: 45px;
   margin: 25px 0 0 0
+}
+
+.human-winner-token,
+.computer-winner-token {
+  margin-bottom: -25px
 }
 
 h1 {
@@ -84,11 +91,11 @@ img {
   height: 150px;
   margin: 15px;
   cursor: pointer;
-  opacity: 0.6
+  transition: all .2s ease-in-out;
 }
 
 img:hover {
-  opacity: 1.0
+  transform: scale(1.1);
 }
 
 form {
@@ -96,6 +103,8 @@ form {
   height: 65%;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+
 }
 
 button {
@@ -103,15 +112,6 @@ button {
   background-color: #3f3f3beb;
   width: 100px;
   cursor: pointer;
-  margin: 15px;
+  margin: 100px 15px 15px 15px;
   border: 0;
-}
-
-.human-side {
-  flex: display;
-  align-items: center;
-}
-
-.change-button {
-  
 }
