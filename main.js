@@ -18,6 +18,9 @@ var scissorsIcon = document.querySelector("#happy-scissors-icon");
 var rocksIcon = document.querySelector("#happy-rocks-icon");
 var alienIcon = document.querySelector("#happy-alien-icon");
 var lizardIcon = document.querySelector("#happy-lizard-icon");
+var compWinnerToken = document.querySelector(".computer-winner-token")
+var humanWinnerToken = document.querySelector(".human-winner-token")
+
 
 //Event Listeners
 
@@ -71,6 +74,7 @@ function createGameClassic(e) {
     hide(alternativePageMessage)
     hide(classicOptionIcons)
     winCount()
+    showWinnerToken()
     showResults(player1.fighter, player2.fighter)
     setTimeout(displayClassic, 2000)
     setTimeout(removeNewIcon, 1900)
@@ -98,6 +102,7 @@ function createGameDifficult(e) {
     hide(classicOptionIcons)
     hide(difficultOptionIcons)
     winCount()
+    showWinnerToken()
     showResults(player1.fighter, player2.fighter)
     setTimeout(displayDifficult, 2000)
     setTimeout(removeNewIcon, 1900)
@@ -113,6 +118,20 @@ function randomIcon(array) {
 }
 
 // Display Functions
+function showWinnerToken() {
+  if (player1.wins === player2.wins) {
+    hide(humanWinnerToken)
+    hide(compWinnerToken)
+  } else if (player1.wins > player2.wins) {
+    show(humanWinnerToken)
+    hide(compWinnerToken)
+  } else {
+    hide(humanWinnerToken)
+    show(compWinnerToken)
+  }
+}
+
+
 function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
