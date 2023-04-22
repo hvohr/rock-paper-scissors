@@ -1,7 +1,6 @@
 * {
   font-family: 'Urbanist', sans-serif;
   color: white;
-
 }
 
 body,
@@ -35,7 +34,9 @@ body {
 }
 
 .human-emoji,
-.computer-emoji {
+.computer-emoji,
+.computer-winner-token,
+.human-winner-token {
   font-size: 45px;
   margin: 25px 0 0 0
 }
@@ -97,6 +98,7 @@ form {
   height: 65%;
   align-items: center;
   justify-content: center;
+
 }
 
 button {
