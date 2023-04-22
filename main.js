@@ -62,16 +62,17 @@ function createGameClassic(e) {
     player2.fighter = opponent
     player1.fighter = e.target.id
     if (player2.fighter === player1.fighter) {
-      show(drawMessage)
+      alternativePageMessage.innerText = `🥲It's a draw!🥲`
     } else if (winner === player2.fighter) {
-      show(computerWinnerMessage)
+      alternativePageMessage.innerText = `💻Computer won this round!💻`
       player2.wins++
     } else {
-      show(humanWinnerMessage)
+      alternativePageMessage.innerText = `👩🏼You won this round!👩🏼`
       player1.wins++
     }
     displayResult()
     setTimeout(displayClassic, 2000)
+    show(changeGameButton)
   }
 }
 
@@ -82,28 +83,28 @@ function createGameDifficult(e) {
     player1.fighter = e.target.id
     var winner = evaluateWinnerDifficult(player1.fighter, player2.fighter)
     if (player2.fighter === player1.fighter) {
-      show(drawMessage)
+      alternativePageMessage.innerText = `🥲It's a draw!🥲`
     } else if (winner === player2.fighter) {
-      show(computerWinnerMessage)
+      alternativePageMessage.innerText = `💻Computer won this round!💻`
       player2.wins++
     } else {
-      show(humanWinnerMessage)
+      alternativePageMessage.innerText = `👩🏼You won this round!👩🏼`
       player1.wins++
     }
     displayResult()
     hide(difficultOptionIcons)
     setTimeout(displayDifficult, 2000)
+    show(changeGameButton)
   }
 }
 
 function displayResult() {
   setTimeout(removeNewIcon, 1900)
   setTimeout(removeNewIcon, 1900)
-  show(changeGameButton)
-  showResults(player1.fighter, player2.fighter)
+  showIconResults(player1.fighter, player2.fighter)
   winCount()
   showWinnerToken()
-  hide(alternativePageMessage)
+  show(alternativePageMessage)
   hide(classicOptionIcons)
 }
 
@@ -132,7 +133,7 @@ function removeNewIcon() {
   resultsIcons.removeChild(resultsIcons.firstElementChild);
 }
 
-function showResults(winner, loser) {
+function showIconResults(winner, loser) {
   var winnerImg = document.createElement("img");
   var winnerName = winner.substr(0, winner.indexOf('-icon'))
   winnerImg.setAttribute("src", `./assets/${winnerName}.png`);
@@ -145,12 +146,6 @@ function showResults(winner, loser) {
   document.getElementById("result").appendChild(loserImg);
 }
 
-function hideResultMessage() {
-  hide(computerWinnerMessage)
-  hide(humanWinnerMessage)
-  hide(drawMessage)
-}
-
 function hide(element) {
   element.setAttribute("hidden", "")
 }
@@ -160,16 +155,17 @@ function show(element) {
 }
 
 function displayClassic() {
+  alternativePageMessage.innerText = `Choose your fighter!`
   difficulty = "classic";
   show(alternativePageMessage);
   hide(mainPageMessage);
   hide(classicVersion);
   hide(difficultVersion);
   show(classicOptionIcons);
-  hideResultMessage()
 }
 
 function displayDifficult() {
+  alternativePageMessage.innerText = `Choose your fighter!`
   difficulty = "difficult";
   classicOptionIcons.addEventListener('click', createGameDifficult)
   difficultOptionIcons.addEventListener('click', createGameDifficult)
@@ -179,7 +175,6 @@ function displayDifficult() {
   hide(difficultVersion);
   show(classicOptionIcons);
   show(difficultOptionIcons)
-  hideResultMessage()
 }
 
 function displayHome() {
@@ -190,7 +185,6 @@ function displayHome() {
   hide(classicOptionIcons);
   hide(difficultOptionIcons)
   hide(changeGameButton)
-  hideResultMessage()
 }
 
 function winCount() {
