@@ -41,6 +41,11 @@ body {
   margin: 25px 0 0 0
 }
 
+.human-winner-token,
+.computer-winner-token {
+  margin-bottom: -25px
+}
+
 h1 {
   font-weight: 600;
   font-size: 60px;
@@ -107,6 +112,6 @@ button {
   background-color: #3f3f3beb;
   width: 100px;
   cursor: pointer;
-  margin: 15px;
+  margin: 100px 15px 15px 15px;
   border: 0;
 }
