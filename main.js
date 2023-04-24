@@ -69,7 +69,6 @@ function createGameClassic(e) {
     }
     displayResult()
     setTimeout(displayClassic, 2000)
-    show(changeGameButton)
   }
 }
 
@@ -91,13 +90,13 @@ function createGameDifficult(e) {
     displayResult()
     hide(difficultOptionIcons)
     setTimeout(displayDifficult, 2000)
-    show(changeGameButton)
   }
 }
 
 function displayResult() {
   setTimeout(removeNewIcon, 1900)
   setTimeout(removeNewIcon, 1900)
+  setTimeout(showButton, 2000)
   showIconResults(player1.fighter, player2.fighter)
   winCount()
   showWinnerToken()
@@ -112,6 +111,10 @@ function randomIcon(array) {
 }
 
 // Display Functions
+
+function showButton() {
+  show(changeGameButton)
+}
 
 function showWinnerToken() {
   if (player1.wins === player2.wins) {
@@ -209,7 +212,7 @@ function evaluateWinnerDifficult(userIcon, opponentIcon) {
   } else if (userIcon === "happy-rocks-icon" && (opponentIcon === "happy-scissors-icon" || opponentIcon === "happy-lizard-icon")) {
     return userIcon
   } else if (userIcon === "happy-paper-icon" && (opponentIcon === "happy-rock-icon" & opponentIcon === "happy-alien-icon")) {
-    return userIcon
+    return userIcon 
   } else if (userIcon === "happy-lizard-icon" && (opponentIcon === "happy-paper-icon" || opponentIcon === "happy-alien-icon")) {
     return userIcon
   } else if (userIcon === "happy-alien-icon" && (opponentIcon === "happy-rocks-icon" || opponentIcon === "happy-scissors-icon")) {
