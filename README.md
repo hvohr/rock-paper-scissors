@@ -9,9 +9,12 @@
 - To access this website, navigate to the [Github respository](https://github.com/hvohr/rock-paper-scissors) and fork the repository. You then want to clone it down on your local machine by copying the SSH key and typing `git clone` with the SSH key after it. You then want to `cd` into the new directory labeled rockPaperScissors. Run `open index.html` in the terminal to view the application in the browser.
 
 ## Preview of App
-![Screen Shot 2023-04-24 at 1 04 39 PM](https://user-images.githubusercontent.com/123392693/234092181-4823ec0d-85df-4ac7-b864-d30271ce9128.jpeg)
-![Screen Shot 2023-04-24 at 1 06 12 PM](https://user-images.githubusercontent.com/123392693/234092182-5e328042-ea67-446e-9cbd-3c6a70cfcce3.jpeg)
+#### Website Home Page
 ![Screen Shot 2023-04-24 at 1 03 56 PM](https://user-images.githubusercontent.com/123392693/234092187-50764069-0af3-41b8-9604-49ca8cc81fe2.jpeg)
+#### Classic Version Page
+![Screen Shot 2023-04-24 at 1 04 39 PM](https://user-images.githubusercontent.com/123392693/234092181-4823ec0d-85df-4ac7-b864-d30271ce9128.jpeg)
+#### Difficult Version Page
+![Screen Shot 2023-04-24 at 1 06 12 PM](https://user-images.githubusercontent.com/123392693/234092182-5e328042-ea67-446e-9cbd-3c6a70cfcce3.jpeg)
 
 ## Contributors
 
