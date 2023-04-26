@@ -39,13 +39,13 @@ var difficultFighters = [alienIcon, lizardIcon, paperIcon, scissorsIcon, rocksIc
 // Data Models
 
 var player1 = {
-  name: "Computer",
+  name: "Human",
   fighter: "unknown",
   wins: 0
 }
 
 var player2 = {
-  name: "Human",
+  name: "Computer",
   fighter: "unknown",
   wins: 0
 }
@@ -55,10 +55,10 @@ var player2 = {
 function createGameClassic(e) {
   if (e.target.classList.contains("happy") && difficulty === "classic") {
     var opponent = randomIcon(classicFighters)
-    var winner = evaluateWinner(player1.fighter, player2.fighter)
-    player2.fighter = opponent
     player1.fighter = e.target.id
-    if (player2.fighter === player1.fighter) {
+    player2.fighter = opponent
+    var winner = evaluateWinner(player1.fighter, player2.fighter)
+    if (player1.fighter === player2.fighter) {
       alternativePageMessage.innerText = `🥲It's a draw!🥲`
     } else if (winner === player2.fighter) {
       alternativePageMessage.innerText = `💻Computer won this round!💻`
@@ -75,10 +75,10 @@ function createGameClassic(e) {
 function createGameDifficult(e) {
   if (e.target.classList.contains("happy") && difficulty === "difficult") {
     var opponent = randomIcon(difficultFighters)
-    player2.fighter = opponent
     player1.fighter = e.target.id
+    player2.fighter = opponent
     var winner = evaluateWinnerDifficult(player1.fighter, player2.fighter)
-    if (player2.fighter === player1.fighter) {
+    if (player1.fighter === player2.fighter) {
       alternativePageMessage.innerText = `🥲It's a draw!🥲`
     } else if (winner === player2.fighter) {
       alternativePageMessage.innerText = `💻Computer won this round!💻`
